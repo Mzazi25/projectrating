@@ -76,10 +76,13 @@ WSGI_APPLICATION = 'ratings.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ratings',
+        'USER': 'user',
+        'PASSWORD':'Mzazi25',
     }
 }
+
 
 
 # Password validation
