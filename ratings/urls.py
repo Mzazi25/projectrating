@@ -21,12 +21,12 @@ from django.contrib.auth.views import LoginView,LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path(r'',include('reviews.urls')),
+    path('',include('reviews.urls')),
     path('accounts/register/',
         RegistrationView.as_view(success_url='/account/'),
         name='django_registration_register'),
-    path(r'^accounts/', include('django_registration.backends.one_step.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path(r'^logout/$', LogoutView.as_view, {"next_page": '/'}),
-    path(r'^login/$', LoginView.as_view(), {"next_page": '/'}),
+    path('accounts', include('django_registration.backends.one_step.urls')),
+    path('accounts', include('django.contrib.auth.urls')),
+    path('logout', LogoutView.as_view, {"next_page": '/'}),
+    path('login', LoginView.as_view(), {"next_page": '/'}),
 ]
