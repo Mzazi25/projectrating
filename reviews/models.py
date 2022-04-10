@@ -13,7 +13,7 @@ class Project(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return str(self.project_name)
+        return str(self.name)
 class Rating(models.Model):
     design = models.IntegerField(blank=True)
     usability = models.IntegerField(blank=True)
