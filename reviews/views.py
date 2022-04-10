@@ -14,3 +14,16 @@ def dashboard(request):
     #adding context
     project = {'project':project}
     return render(request,'dashboard.html', project)
+
+def search_results(request):
+
+    if 'project' in request.GET and request.GET["project"]:
+        search_term = request.GET.get("project")
+        searched_category = Project.search_by_title(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'search.html',{"message":message,"category": searched_category})
+
+    else:
+        message = "You haven't searched for any project"
+        return render(request, 'search.html',{"message":message})
