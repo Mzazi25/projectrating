@@ -27,3 +27,23 @@ def search_results(request):
     else:
         message = "You haven't searched for any project"
         return render(request, 'search.html',{"message":message})
+
+@login_required(login_url='accounts/login/')
+def myAccount(request):
+    
+    if request.method == 'POST':
+        data = request.POST
+                       
+        project = Project.objects.create(
+            name = data['p-name'],
+            owner = request.user,
+            link = data ['p-link'],
+            description = data['description'],
+                               
+        )
+        return redirect('profile')
+    current = request.user.pk
+    profile = Profile.objects.filter(name=current).all()
+    project = Project.objects.filter(owner=current).all()
+    prj={'profile':profile,'project':project}
+    return render(request,'main/profile.html',prj)
