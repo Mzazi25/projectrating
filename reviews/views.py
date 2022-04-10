@@ -43,7 +43,7 @@ def profile(request):
         )
         return redirect('profile')
     current = request.user.pk
-    profile = Profile.objects.filter(name=current).all()
-    project = Project.objects.filter(owner=current).all()
+    profile = Profile.objects.filter(username=current).all()
+    project = Project.objects.filter(description=current).all()
     prj={'profile':profile,'project':project}
-    return render(request,'account.html',prj)
+    return render(request,'profile.html',prj)

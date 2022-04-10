@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% load static %}
+{% block content %}
+<h1>Account Dashboard</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="start">
+                    <div class="header my-4">
+                        <button type="button" class="btn btn-outline-info" data-bs-toggle="collapse"
+                            data-bs-target="#collapseExamples">Add <span class="br">Project</span></button>
+                    </div>
+                </div>
+                <div class="edits collapse" id="collapseExamples">
+                    <form method="POST" , action="{% url 'profile' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="p-name" placeholder="Enter project name">
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" name="description" placeholder="Project description...."
+                                rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="p-link" placeholder="Deployed url">
+                        </div>
+                        <button type="submit" class="btn btn-info mb-3">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+       
+    <div class="container">
+        <div class="row">
+            {% for project in project %}
+        <div class="col-md-4" style="display: flex;">
+            <div class="coupon my-2" style="width: 100%;">
+                <div class="mylogo">
+                    <h3>{{project.owner}}</h3>
+                </div>
+                <div class="mylogo" style="background-color:white">
+                    <h2><b>{{project.name}}</b></h2>
+                    <p>{{project.description}}</p>
+                </div>
+                <div class="mylogo">
+                    <p class="expire">Published: <span style="color: black;">{{project.pub_date}}</span></p>
+                
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

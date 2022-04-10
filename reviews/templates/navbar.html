@@ -25,20 +25,26 @@
 
         </form>
       </div>
+     
     <!-- search form end -->
     <div>
             {% if user.is_authenticated %}
+
             <ul>
               <li class="dropdown" style="list-style:none;">
                 <a href="#" class="dropdown-toggle btn btn-dark" data-toggle="dropdown" role="button" aria-expanded="false">Account
                           <span class="caret"></span>
                       </a>
+                      <button type="button" class="btn btn-secondary"><a class="dropdown-item" href="{%url 'dashboard'%}">Dashboard</a></button>
+                      <button type="button" class="btn btn-secondary"><a class="dropdown-item" href="{%url 'profile'%}">Profile</a></button>
+                      <button type="button" class="btn btn-secondary"><a class="dropdown-item" href="/logout">Logout</a></button>
+                  
                 <ul class="dropdown-menu" role="menu">
                   <li>
-                    <a href="{%url 'dashboard'%}">Home</a>
+                    <a class="dropdown-item" href="{%url 'dashboard'%}">Home</a>
+
                   </li>
-                  <li>
-                    <a href="/accounts/password/change">Change Password</a>
+                    <a class="dropdown-item" href="/accounts/password/change">Change Password</a>
                   </li>
                   <li>
                     <a href="/logout">Logout</a>
