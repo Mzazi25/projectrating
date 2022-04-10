@@ -3,6 +3,10 @@ from django.http  import HttpResponse
 from .models import Profile,Project,Rating
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import ProfileSerializer,ProjectSerializer,RatingSerializer
+
 User = get_user_model()
 
 
@@ -47,3 +51,14 @@ def profile(request):
     project = Project.objects.filter(description=current).all()
     prj={'profile':profile,'project':project}
     return render(request,'profile.html',prj)
+
+class ProjectMerch(APIView):
+    def get(self, request, format=None):
+        all_projects = Project.objects.all()
+        serializers =ProjectSerializer(all_projects, many=True)
+        return Response(serializers.data)
+class ProfileMerch(APIView):
+    def get(self, request, format=None):
+        all_profile = Profile.objects.all()
+        serializers =ProfileSerializer(all_profile, many=True)
+        return Response(serializers.data)
