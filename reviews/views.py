@@ -29,7 +29,7 @@ def search_results(request):
         return render(request, 'search.html',{"message":message})
 
 @login_required(login_url='accounts/login/')
-def myAccount(request):
+def profile(request):
     
     if request.method == 'POST':
         data = request.POST
@@ -46,4 +46,4 @@ def myAccount(request):
     profile = Profile.objects.filter(name=current).all()
     project = Project.objects.filter(owner=current).all()
     prj={'profile':profile,'project':project}
-    return render(request,'main/profile.html',prj)
+    return render(request,'account.html',prj)
