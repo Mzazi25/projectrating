@@ -18,20 +18,16 @@ from django.contrib import admin
 from django.urls import path,include,re_path
 from django_registration.backends.one_step.views import RegistrationView
 from django.contrib.auth.views import LoginView,LogoutView 
-from django.conf import settings
-from django.conf.urls.static import static
+
 urlpatterns = [
 
     path('admin/', admin.site.urls),
     path('',include('reviews.urls')),
     path('accounts/register/',
-        RegistrationView.as_view(success_url='/accounts/'),
+        RegistrationView.as_view(success_url='/dashboard'),
         name='django_registration_register'),
     path('accounts/', include('django_registration.backends.one_step.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('logout/', LogoutView.as_view, {"next_page": '/'}),
+    path('logout/', LogoutView.as_view(), {"next_page": '/'}),
     path('login/', LoginView.as_view(), {"next_page": '/'}),
 ]
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
-    urlpatterns += static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
